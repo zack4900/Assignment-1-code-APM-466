@@ -1,0 +1,178 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6.4in, 8.53in}]{geometry}
+\usepackage{amsmath, tikz, amsfonts, bbm, mathrsfs, graphicx, amssymb, amsthm, hyperref, centernot, enumerate, bbm, xcolor, lmodern, mathdots, amsfonts, graphicx}
+
+\title{MAT1856/APM466 Assignment 1}
+\author{Chakrouni Zakaria, Student \#: 1005281393}
+\date{February, 2020}
+
+\begin{document}
+
+\maketitle
+
+\section*{Fundamental Questions - 25 points}
+
+\begin{enumerate}
+    \item \hfill
+    \begin{enumerate}
+        \item Governments issue bonds instead of printing money to avoid creating inflation and devaluing the country’s own currency.
+        \item One situation where the long-term yield curve might flatten would be if the Federal Reserve Board decides to raise the short-term rates, causing the short-term bonds to have a higher yield in comparison to the long-term bonds.
+        \item Quantitative easing is a monetary policy that consists of a central bank buying different financial assets in order to inject money in the economy. The US Feds used this policy since the start of COVID-19 by purchasing Treasury securities and mortgage-backed securities in order to stimulate the economy and reach the Fed’s goals in terms of employment and price stability.
+
+
+    \end{enumerate}
+    \item In order to realize our bootstrapping, we will choose bonds that are consistent in the spacing of their time to maturity. In other words, we will choose our 10 bonds such that they are as equally spread out as possible on the 0 to 5 year period. This will allow us to optimally interpolate the yield of maturities that lies between the chosen maturity dates.
+    The list of the chosen bonds is as follows:
+     CAN 0.25 Aug 1; CAN 0.25 Feb 1; CAN 0.25 Aug 1; CAN 0.75 Feb 1; CAN 0.15 Sep 1; CAN 2.25 Jun 1; CAN 0.5 Sep 1; CAN 0.25 Mar 1; CAN 1 Sep 1; CAN 1 Jun 1
+
+    \item If we have several stochastic processes for which each process represents a unique point along a stochastic curve (assume points/processes are evenly distributed along the curve), then we could want to create a smaller data set that what we currently have without the drawback of losing too much information. In order to do that, we can consider the different linear combinations of our stochastic processes. When considering these combinations, we can want to rank them in such a way that the first “component” of this process will account for the maximum amount of variance among the stochastic processes and being uncorrelated with the remaining components. We can then repeat this ranking process until we consider every linear combination. In this process the eigenvalues and the eigenvectors of the data play a crucial role: the eigenvectors of the covariance matrix of our processes are the directions of the axes where there is the most variance while the eigenvalues quantify the amount of that variance.
+\end{enumerate}
+
+
+
+\section*{Empirical Questions - 75 points} 
+
+\begin{enumerate}
+\setcounter{enumi}{3} 
+    \item \hfill
+    \begin{enumerate}
+        \item  In order to calculate the bonds yield to maturity of our 10 selected bonds, I used the cash flow valuation formula: \begin{equation}
+        \sum^{i}y_i*e^{-r_it_i}
+        \end{equation}
+        where yi is the yield rate and the cash flows are taken as being the coupon payments until maturity and the face value and the final coupon payment.
+        
+        Knowing that this formula should equate the gathered price of the bonds during our period between 10 January to 21 of January, I used an online grapher in order to find the necessary yield rate with the following curve : \begin{equation}
+        f(y_i) = \sum^{i}y_i*e^{-r_it_i} - current price 
+        \end{equation}
+        This can be done by looking at the x-axis intercept of the curve The results were recorder on R and the obtained graph is reported below:\\
+        \includegraphics[width=8cm, height=6cm]{1.png}
+        \centering
+        
+        In term of the technique used to find the yield rates between our recorded yield rates, we used a simple linear interpolation. This method allows us constructing new data points within the range of our obtained bond rates. 
+        \item  In order to derive the spot curve with terms ranging from 1-5 years from the chosen bonds in part 2, we will use a bootstrapping method:
+        Step 1 : We first find the spot rate of the bond that matures in 6 months using the following formula;
+        \begin{equation}
+        r_{0.5} = -log(P_{0.5}/N_{0.5})/T
+        \end{equation}
+        (following the lecture's notations)
+        Step 2 : we recursively solve for the remaining spot rates such that we can find ri after getting  rj  for all j < i, and using the following formula:
+        \begin{equation}
+        r_{i} = -log(P_{i} - \sum^{j<i}C_i*e^{-r_j*j}/N_{j})/T_j
+        \end{equation}
+        Following this process, we get all the spot rates r{0.5}, r{1}, r{1.5},...,r{5} and plot them in the following graph:\\
+        \includegraphics[width=8cm, height=6cm]{2.png}
+        \centering
+        \item In order to derive the 1-year forward curve with terms ranging from 2-5 years from the chosen bonds in part 2, we used the following strategy:
+        Step 1: we first try plot polynomial regressions of different degrees given the data in order to find the best fitting equation to work with for forward rates. Step 2: We retrieve the equation of our polynomial regression and derive the forward rates using the following formulas:
+        \begin{equation}
+        f(t,T) = -\frac{\partial}{\partial T} log(P(t,T))
+        \end{equation}
+        where P(t,T) is taken as being our best fitting polynomial.
+        We follow this formula for all the wanted forward rates and we get the following graph:\\
+        \includegraphics[width=8cm, height=6cm]{3.png}
+        \centering
+        
+    \end{enumerate}
+    \item After using the given formula for both the yield and forward rates, we used the covariance function of R in order to get the covariance matrix as follows:\\
+    Covariance matrix for yield rates: \\
+    \begin{bmatrix}
+    0.0011069787 & 0.0003662648 & 2.797584e-04 & 0.0004640397 & 0.0003464551\\
+    0.0003662648 & 0.0002365112 & 1.285925e-04 & 0.0002855664 & 0.0001785453\\
+    0.0002797584 & 0.0001285925 & 8.828853e-05 & 0.0001734417  & 0.0001198769\\
+    0.0004640397 & 0.0002855664 & 1.734417e-04 & 0.0004116879 & 0.0002367527\\
+    0.0003464551 & 0.0001785453 & 1.198769e-04 & 0.0002367527 & 0.0001927548\\
+    \end{bmatrix}\\
+    Covariance matrix for forward rates:\\
+    \begin{bmatrix}
+    0.0005891005 & 0.0005239673 & 0.001148728 & -0.0080631292\\
+    0.0005239673 & 0.0007828854 & 0.002074913 & -0.0005614443\\
+    0.0011487283 & 0.0020749125 & 0.007575440 & 0.0144239434\\
+    -0.0080631292 & -0.0005614443 & 0.014423943 & 0.5993807678\\
+    \end{bmatrix}
+    \item Using the eigen() function in R, we are able to get the following eigenvalues and eigenvectors:\\
+    - For the yield rates covariance matrix:\\
+    Eigenvalues :  \begin{equation}\lambda_1 = 1.729607*10^{-3};\lambda_2 = 2.421598*10{-4};\\\lambda_3 = 3.823644*10^{-5};\lambda_4 = 2.490159*10{-5};\lambda_5 =1.316000*10{-6}
+     \end{equation} 
+     Eigenvectors:
+\begin{equation}
+     v_1 &= \begin{bmatrix}
+           0.7648981 \\
+           0.3220675 \\
+           0.2213835 \\
+           0.4206824 \\
+           0.2919232
+         \end{bmatrix}
+    v_2 &= \begin{bmatrix}
+            0.62498337 \\
+           -0.39729193 \\
+           -0.08349753 \\
+           -0.62252539 \\
+           -0.23884137
+         \end{bmatrix}
+    v_3 &= \begin{bmatrix}
+          -0.10493541 \\
+          -0.19227288 \\
+           0.09962563 \\
+          -0.34419539 \\
+           0.90753731
+         \end{bmatrix}
+    v_4 &= \begin{bmatrix}
+           0.02232342 \\
+          -0.83752336 \\
+           0.09708076 \\
+           0.53693861 \\
+           0.01812549
+         \end{bmatrix}
+    v_5 &= \begin{bmatrix}
+           0.113211900 \\
+           0.004170785 \\
+          -0.961596369 \\
+           0.169454862 \\
+           0.183801914
+         \end{bmatrix}
+     \end{equation} 
+     
+     We can interpret the highest eigenvalue by seeing as the ratio of the sum of all the eigenvalues and giving us that 85 percent of the variance in the data is explained by its corresponding eigenvector.The eigenvector gives us that the main direction of the variance in the data is best described along "V_1
+     
+     - For the forward rates covariance matrix:\\
+    Eigenvalues :  \begin{equation}\lambda_1 = 5.998402*10^{-1};\lambda_2 = 8.111984*10^{-3};\\\lambda_3 = 3.028413*10^{-4};\lambda_4 = 7.313328*10^{-5}
+     \end{equation} 
+     Eigenvectors:
+          \begin{equation}
+     v_1 &= \begin{bmatrix}
+           -0.0134042944 \\
+           -0.0008643556 \\
+           0.0243154512 \\
+           0.9996140938 \\
+         \end{bmatrix}
+    v_2 &= \begin{bmatrix}
+            -0.18496836 \\
+           -0.28128869\\
+           -0.94141187 \\
+           0.02017614 \\
+         \end{bmatrix}
+    v_3 &= \begin{bmatrix}
+          0.76139959 \\
+          0.56467190  \\
+          -0.31792543 \\
+          0.01843171 \\
+         \end{bmatrix}
+    v_4 &= \begin{bmatrix}
+           -0.621190546 \\
+          0.775900489 \\
+           -0.109890298 \\
+           -0.004985859 \\
+         \end{bmatrix}
+     \end{equation} 
+     We can interpret the highest eigenvalue by seeing as the ratio of the sum of all the eigenvalues and giving us that 98 percent of the variance in the data is explained by its corresponding eigenvector.The eigenvector gives us that the main direction of the variance in the data is best described along "V_1"
+\end{enumerate}
+
+\section*{References and GitHub Link to Code}
+References:\\
+1- "OPTIONS, FUTURES, AND OTHER DERIVATIVES" by John C. Hull\\
+2- "Fixed Income Securities", by Frank J. Fabozzi and Steven V. Mann,\\
+
+GitHub Link:
+https://github.com/zack4900/Assignment-1-code-APM-466
+\end{document}
