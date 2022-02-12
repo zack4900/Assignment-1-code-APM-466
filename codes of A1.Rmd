@@ -1,0 +1,812 @@
+---
+title: "A1"
+output: html_document
+---
+# 1. Question 1:
+
+```{r}
+# importing the necessary libraries
+library(xts) 
+library(ggplot2) 
+library(stats)
+```
+
+```{r}
+#taking the necessary data and making some vectors from the gathered data
+bonds<-read.csv("data1.csv", header=F)
+bonds<-as.data.frame(bonds)
+coupons<-bonds[,c(2:2)]
+coupons_11 <-coupons[c(4:4, 10:10, 13:13, 15:15, 18:18, 7:7, 22:22, 28:28, 30:30, 31:31, 24:24)]
+time_to_maturity <-data.frame(0.1095, 0.5288, 1.0329, 1.5288, 2.0329, 2.6164, 3.3644, 3.6164, 4.1123, 4.5616, 5.3644)
+d_10<-bonds[,c(5:5)]
+d_10 <-d_10[c(4:4, 10:10, 13:13, 15:15, 18:18, 7:7, 22:22, 28:28, 30:30, 31:31, 24:24)]
+d_11<-bonds[,c(6:6)]
+d_11 <-d_11[c(4:4, 10:10, 13:13, 15:15, 18:18, 7:7, 22:22, 28:28, 30:30, 31:31, 24:24)]
+d_12<-bonds[,c(7:7)]
+d_12 <-d_12[c(4:4, 10:10, 13:13, 15:15, 18:18, 7:7, 22:22, 28:28, 30:30, 31:31, 24:24)]
+d_13<-bonds[,c(8:8)]
+d_13 <-d_13[c(4:4, 10:10, 13:13, 15:15, 18:18, 7:7, 22:22, 28:28, 30:30, 31:31, 24:24)]
+d_14<-bonds[,c(9:9)]
+d_14 <-d_14[c(4:4, 10:10, 13:13, 15:15, 18:18, 7:7, 22:22, 28:28, 30:30, 31:31, 24:24)]
+d_17<-bonds[,c(10:10)]
+d_17 <-d_17[c(4:4, 10:10, 13:13, 15:15, 18:18, 7:7, 22:22, 28:28, 30:30, 31:31, 24:24)]
+d_18<-bonds[,c(11:11)]
+d_18 <-d_18[c(4:4, 10:10, 13:13, 15:15, 18:18, 7:7, 22:22, 28:28, 30:30, 31:31, 24:24)]
+d_19<-bonds[,c(12:12)]
+d_19 <-d_19[c(4:4, 10:10, 13:13, 15:15, 18:18, 7:7, 22:22, 28:28, 30:30, 31:31, 24:24)]
+d_20<-bonds[,c(13:13)]
+d_20 <-d_20[c(4:4, 10:10, 13:13, 15:15, 18:18, 7:7, 22:22, 28:28, 30:30, 31:31, 24:24)]
+d_21<-bonds[,c(14:14)]
+d_21 <-d_21[c(4:4, 10:10, 13:13, 15:15, 18:18, 7:7, 22:22, 28:28, 30:30, 31:31, 24:24)]
+```
+
+
+#yield rates:
+```{r}
+y_10_0.1 <- (-log((as.numeric(d_10[1])+(130*(as.numeric(coupons_11[1]))/365)))+log(((as.numeric(coupons_11[1])/2)*100+100)))/as.numeric(time_to_maturity[1])
+y_10_0.1
+y_11_0.1 <- (-log((as.numeric(d_11[1])+(130*(as.numeric(coupons_11[1]))/365)))+log(((as.numeric(coupons_11[1])/2)*100+100)))/as.numeric(time_to_maturity[1])
+y_11_0.1
+y_12_0.1 <- (-log((as.numeric(d_12[1])+(130*(as.numeric(coupons_11[1]))/365)))+log(((as.numeric(coupons_11[1])/2)*100+100)))/as.numeric(time_to_maturity[1])
+y_12_0.1
+y_13_0.1 <- (-log((as.numeric(d_13[1])+(130*(as.numeric(coupons_11[1]))/365)))+log(((as.numeric(coupons_11[1])/2)*100+100)))/as.numeric(time_to_maturity[1])
+y_13_0.1
+y_14_0.1 <- (-log((as.numeric(d_14[1])+(130*(as.numeric(coupons_11[1]))/365)))+log(((as.numeric(coupons_11[1])/2)*100+100)))/as.numeric(time_to_maturity[1])
+y_14_0.1
+y_17_0.1 <- (-log((as.numeric(d_17[1])+(130*(as.numeric(coupons_11[1]))/365)))+log(((as.numeric(coupons_11[1])/2)*100+100)))/as.numeric(time_to_maturity[1])
+y_17_0.1
+y_18_0.1 <- (-log((as.numeric(d_18[1])+(130*(as.numeric(coupons_11[1]))/365)))+log(((as.numeric(coupons_11[1])/2)*100+100)))/as.numeric(time_to_maturity[1])
+y_18_0.1
+y_19_0.1 <- (-log((as.numeric(d_19[1])+(130*(as.numeric(coupons_11[1]))/365)))+log(((as.numeric(coupons_11[1])/2)*100+100)))/as.numeric(time_to_maturity[1])
+y_19_0.1
+y_20_0.1 <- (-log((as.numeric(d_20[1])+(130*(as.numeric(coupons_11[1]))/365)))+log(((as.numeric(coupons_11[1])/2)*100+100)))/as.numeric(time_to_maturity[1])
+y_20_0.1
+y_21_0.1 <- (-log((as.numeric(d_21[1])+(130*(as.numeric(coupons_11[1]))/365)))+log(((as.numeric(coupons_11[1])/2)*100+100)))/as.numeric(time_to_maturity[1])
+y_21_0.1
+```
+
+
+
+```{r}
+y_10_0.5 <- 0.010876
+y_10_0.5
+y_11_0.5 <- 0.011066
+y_11_0.5
+y_12_0.5 <- 0.011256
+y_12_0.5
+y_13_0.5 <- 0.011446
+y_13_0.5
+y_14_0.5 <- 0.011636
+y_14_0.5
+y_17_0.5 <- 0.012397
+y_17_0.5
+y_18_0.5 <- 0.012777
+y_18_0.5
+y_19_0.5 <- 0.012777
+y_19_0.5
+y_20_0.5 <- 0.012397
+y_20_0.5
+y_21_0.5 <- 0.012016
+y_21_0.5
+```
+
+```{r}
+y_10_1 <- 0.01277
+y_11_1 <- 0.01325
+y_12_1 <- 0.01296
+y_13_1 <- 0.01306
+y_14_1 <- 0.01326
+y_17_1 <- 0.01404
+y_18_1 <- 0.01462
+y_19_1 <- 0.01482
+y_20_1 <- 0.01434
+y_21_1 <- 0.01384
+```
+
+```{r}
+y_10_1.5 <- 0.0128
+y_10_1.5
+y_11_1.5 <- 0.0133
+y_11_1.5
+y_12_1.5 <- 0.0138
+y_12_1.5
+y_13_1.5 <- 0.0139
+y_13_1.5
+y_14_1.5<- 0.01405
+y_14_1.5
+y_17_1.5 <- 0.014925
+y_17_1.5
+y_18_1.5 <- 0.01532
+y_18_1.5
+y_19_1.5 <- 0.01532
+y_19_1.5
+y_20_1.5 <-0.01525
+y_20_1.5
+y_21_1.5 <- 0.0149
+```
+
+```{r}
+y_10_2 <- 0.0205
+y_11_2 <- 0.0205
+y_12_2 <- 0.02067
+y_13_2 <- 0.02082
+y_14_2 <- 0.02103
+y_17_2 <- 0.0219
+y_18_2 <- 0.0223
+y_19_2 <- 0.0223
+y_20_2 <- 0.02235
+y_21_2 <- 0.022
+```
+
+```{r}
+y_10_2.5 <- 0.0294
+y_10_2.5
+y_11_2.5 <-0.02912
+y_11_2.5
+y_12_2.5 <- 0.02916
+y_12_2.5
+y_13_2.5 <- 0.02931
+y_13_2.5
+y_14_2.5 <- 0.02955
+y_14_2.5
+y_17_2.5 <- 0.03047
+y_17_2.5
+y_18_2.5 <- 0.03078
+y_18_2.5
+y_19_2.5 <- 0.03103
+y_19_2.5
+y_20_2.5 <- 0.03095
+y_20_2.5
+y_21_2.5 <- 0.03055
+```
+
+```{r}
+y_10_3 <- 0.0346
+y_11_3 <- 0.0347
+y_12_3 <- 0.03466
+y_13_3 <- 0.03475
+y_14_3 <- 0.03501
+y_17_3 <- 0.03582
+y_18_3 <- 0.03639
+y_19_3 <- 0.03666
+y_20_3 <- 0.03655
+y_21_3 <- 0.03629
+```
+
+```{r}
+y_10_3.5 <- 0.02
+y_10_3.5
+y_11_3.5 <- 0.0198
+y_11_3.5
+y_12_3.5 <- 0.0196
+y_12_3.5
+y_13_3.5 <- 0.0196
+y_13_3.5
+y_14_3.5 <- 0.0199
+y_14_3.5
+y_17_3.5 <- 0.0206
+y_17_3.5
+y_18_3.5 <- 0.02115
+y_18_3.5
+y_19_3.5 <- 0.02146
+y_19_3.5
+y_20_3.5 <- 0.02134
+y_20_3.5
+y_21_3.5 <- 0.021
+y_21_3.5
+```
+
+```{r}
+y_10_4 <- 0.0175
+y_11_4 <- 0.0173
+y_12_4 <- 0.01745
+y_13_4 <- 0.0174
+y_14_4 <- 0.0177
+y_17_4 <- 0.0184
+y_18_4 <- 0.019
+y_19_4 <- 0.0191
+y_20_4 <- 0.019
+y_21_4 <- 0.01855
+```
+
+```{r}
+y_10_4.5 <-0.0263
+y_11_4.5 <-0.0262
+y_11_4.5
+y_12_4.5 <- 0.0263
+y_12_4.5
+y_13_4.5 <- 0.02621
+y_13_4.5
+y_14_4.5 <- 0.02645
+y_17_4.5 <- 0.0273
+y_17_4.5
+y_18_4.5 <- 0.0278
+y_18_4.5
+y_19_4.5 <- 0.02805
+y_19_4.5
+y_20_4.5 <- 0.02795
+y_21_4.5 <- 0.0267
+```
+
+```{r}
+y_10_5 <- 0.0253
+y_10_5
+y_11_5 <-0.0251
+y_11_5
+y_12_5 <- 0.025
+y_12_5
+y_13_5 <- 0.02525
+y_13_5
+y_14_5 <- 0.02525
+y_14_5
+y_17_5 <- 0.026
+y_17_5
+y_18_5 <- 0.0265
+y_19_5 <- 0.0268
+y_19_5
+y_20_5 <- 0.0266
+y_20_5
+y_21_5 <-0.0263
+```
+
+```{r}
+jan_10y <- c(y_10_0.1,y_10_0.5,y_10_1,y_10_1.5,y_10_2,y_10_2.5,y_10_3,y_10_3.5,y_10_4,y_10_4.5,y_10_5)
+jan_11y <- c(y_11_0.1,y_11_0.5,y_11_1,y_11_1.5,y_11_2,y_11_2.5,y_11_3,y_11_3.5,y_11_4,y_11_4.5,y_11_5)
+jan_12y <- c(y_12_0.1,y_12_0.5,y_12_1,y_12_1.5,y_12_2,y_12_2.5,y_12_3,y_12_3.5,y_12_4,y_12_4.5,y_12_5)
+jan_13y <- c(y_13_0.1,y_13_0.5,y_13_1,y_13_1.5,y_13_2,y_13_2.5,y_13_3,y_13_3.5,y_13_4,y_13_4.5,y_13_5)
+jan_14y <- c(y_14_0.1,y_14_0.5,y_14_1,y_14_1.5,y_14_2,y_14_2.5,y_14_3,y_14_3.5,y_14_4,y_14_4.5,y_14_5)
+jan_17y <- c(y_17_0.1,y_17_0.5,y_17_1,y_17_1.5,y_17_2,y_17_2.5,y_17_3,y_17_3.5,y_17_4,y_17_4.5,y_17_5)
+jan_18y <- c(y_18_0.1,y_18_0.5,y_18_1,y_19_1.5,y_19_2,y_19_2.5,y_19_3,y_19_3.5,y_19_4,y_19_4.5,y_19_5)
+jan_19y <- c(y_19_0.1,y_19_0.5,y_19_1,y_19_1.5,y_19_2,y_19_2.5,y_19_3,y_19_3.5,y_19_4,y_19_4.5,y_19_5)
+jan_20y <- c(y_20_0.1,y_20_0.5,y_20_1,y_20_1.5,y_20_2,y_20_2.5,y_20_3,y_20_3.5,y_20_4,y_20_4.5,y_20_5)
+jan_21y <- c(y_21_0.1,y_21_0.5,y_21_1,y_21_1.5,y_21_2,y_21_2.5,y_21_3,y_21_3.5,y_21_4,y_21_4.5,y_21_5)
+colours <- c("orange", "blue", "red", "forestgreen", "yellow", rgb(0.3,0.3,.3),
+                  rgb(0.6,0.3,0), rgb(.9,0,0), 
+                  rgb(0.3,0.6,0), rgb(0.3,0,.6), rgb(0,0.3,.6))
+time <- c(0.1095,0.5288,1.0329,1.5288,2.0329,2.6164,3.36344,3.6164,4.1123,4.5616,5.3644)
+plot(time,jan_10y,main = "Yield curve" ,xlim = c(0,5),ylim = c(0.01, 0.04), col = colours[1], xlab="Time to Maturity (in years)",ylab="Yields")
+lines(time,jan_10y, col = colours[1])
+lines(time,jan_11y, col = colours[2])
+lines(time,jan_12y, col = colours[3])
+lines(time,jan_13y, col = colours[4])
+lines(time,jan_14y, col = colours[5])
+lines(time,jan_17y, col = colours[6])
+lines(time,jan_18y, col = colours[7])
+lines(time,jan_19y, col = colours[8])
+lines(time,jan_20y, col = colours[9])
+lines(time,jan_21y, col = colours[10])
+legend("topleft", legend = c("Jan-10-2022","Jan-11-2022","Jan-12-2022","Jan-13-2022","Jan-14-2022","Jan-17-2022","Jan-18-2022","Jan-19-2022","Jan-20-2022","Jan-21-2022"),cex=0.8,lty=1, lwd=2, ,col = colours, bg="white")
+```
+
+# spot rates:
+
+```{r}
+r_10_0.1 <- -log(as.numeric(d_10[1])/((as.numeric(coupons_11[1])/2)*100+100))/as.numeric(time_to_maturity[1])
+r_10_0.1
+r_11_0.1 <- -log(as.numeric(d_11[1])/((as.numeric(coupons_11[1])/2)*100+100))/as.numeric(time_to_maturity[1])
+r_11_0.1
+r_12_0.1 <- -log(as.numeric(d_12[1])/((as.numeric(coupons_11[1])/2)*100+100))/as.numeric(time_to_maturity[1])
+r_12_0.1
+r_13_0.1 <- -log(as.numeric(d_13[1])/((as.numeric(coupons_11[1])/2)*100+100))/as.numeric(time_to_maturity[1])
+r_13_0.1
+r_14_0.1 <- -log(as.numeric(d_14[1])/((as.numeric(coupons_11[1])/2)*100+100))/as.numeric(time_to_maturity[1])
+r_14_0.1
+r_17_0.1 <- -log(as.numeric(d_17[1])/((as.numeric(coupons_11[1])/2)*100+100))/as.numeric(time_to_maturity[1])
+r_17_0.1
+r_18_0.1 <- -log(as.numeric(d_18[1])/((as.numeric(coupons_11[1])/2)*100+100))/as.numeric(time_to_maturity[1])
+r_18_0.1
+r_19_0.1 <- -log(as.numeric(d_19[1])/((as.numeric(coupons_11[1])/2)*100+100))/as.numeric(time_to_maturity[1])
+r_19_0.1
+r_20_0.1 <- -log(as.numeric(d_20[1])/((as.numeric(coupons_11[1])/2)*100+100))/as.numeric(time_to_maturity[1])
+r_20_0.1
+r_21_0.1 <- -log(as.numeric(d_21[1])/((as.numeric(coupons_11[1])/2)*100+100))/as.numeric(time_to_maturity[1])
+r_21_0.1
+```
+```{r}
+r_10_0.5 <- -log((as.numeric(d_10[2])-as.numeric(coupons_11[2])*100*0.5*exp(-(r_10_0.1*as.numeric(time_to_maturity[1]))))/((as.numeric(coupons_11[2])/2)*100+100))/as.numeric(time_to_maturity[2])
+r_10_0.5
+r_11_0.5 <- -log((as.numeric(d_11[2])-as.numeric(coupons_11[2])*100*0.5*exp(-(r_11_0.1*as.numeric(time_to_maturity[1]))))/((as.numeric(coupons_11[2])/2)*100+100))/as.numeric(time_to_maturity[2])
+r_11_0.5
+r_12_0.5 <- -log((as.numeric(d_12[2])-as.numeric(coupons_11[2])*100*0.5*exp(-(r_12_0.1*as.numeric(time_to_maturity[1]))))/((as.numeric(coupons_11[2])/2)*100+100))/as.numeric(time_to_maturity[2])
+r_12_0.5
+r_13_0.5 <- -log((as.numeric(d_13[2])-as.numeric(coupons_11[2])*100*0.5*exp(-(r_13_0.1*as.numeric(time_to_maturity[1]))))/((as.numeric(coupons_11[2])/2)*100+100))/as.numeric(time_to_maturity[2])
+r_13_0.5
+r_14_0.5 <- -log((as.numeric(d_14[2])-as.numeric(coupons_11[2])*100*0.5*exp(-(r_14_0.1*as.numeric(time_to_maturity[1]))))/((as.numeric(coupons_11[2])/2)*100+100))/as.numeric(time_to_maturity[2])
+r_14_0.5
+r_17_0.5 <- -log((as.numeric(d_17[2])-as.numeric(coupons_11[2])*100*0.5*exp(-(r_17_0.1*as.numeric(time_to_maturity[1]))))/((as.numeric(coupons_11[2])/2)*100+100))/as.numeric(time_to_maturity[2])
+r_17_0.5
+r_18_0.5 <- -log((as.numeric(d_18[2])-as.numeric(coupons_11[2])*100*0.5*exp(-(r_18_0.1*as.numeric(time_to_maturity[1]))))/((as.numeric(coupons_11[2])/2)*100+100))/as.numeric(time_to_maturity[2])
+r_18_0.5
+r_19_0.5 <- -log((as.numeric(d_19[2])-as.numeric(coupons_11[2])*100*0.5*exp(-(r_19_0.1*as.numeric(time_to_maturity[1]))))/((as.numeric(coupons_11[2])/2)*100+100))/as.numeric(time_to_maturity[2])
+r_19_0.5
+r_20_0.5 <- -log((as.numeric(d_20[2])-as.numeric(coupons_11[2])*100*0.5*exp(-(r_20_0.1*as.numeric(time_to_maturity[1]))))/((as.numeric(coupons_11[2])/2)*100+100))/as.numeric(time_to_maturity[2])
+r_20_0.5
+r_21_0.5 <- -log((as.numeric(d_21[2])-as.numeric(coupons_11[2])*100*0.5*exp(-(r_21_0.1*as.numeric(time_to_maturity[1]))))/((as.numeric(coupons_11[2])/2)*100+100))/as.numeric(time_to_maturity[2])
+r_21_0.5
+```
+```{r}
+r_10_1 <- -log((as.numeric(d_10[3])-as.numeric(coupons_11[3])*50*exp(-(r_10_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[3])*50*exp(-(r_10_0.5*as.numeric(time_to_maturity[2]))))/((as.numeric(coupons_11[3])/2)*100+100))/as.numeric(time_to_maturity[3])
+r_10_1
+r_11_1 <- -log((as.numeric(d_11[3])-as.numeric(coupons_11[3])*50*exp(-(r_11_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[3])*50*exp(-(r_11_0.5*as.numeric(time_to_maturity[2]))))/((as.numeric(coupons_11[3])/2)*100+100))/as.numeric(time_to_maturity[3])
+r_11_1
+r_12_1 <- -log((as.numeric(d_12[3])-as.numeric(coupons_11[3])*50*exp(-(r_12_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[3])*50*exp(-(r_12_0.5*as.numeric(time_to_maturity[2]))))/((as.numeric(coupons_11[3])/2)*100+100))/as.numeric(time_to_maturity[3])
+r_12_1
+r_13_1 <- -log((as.numeric(d_13[3])-as.numeric(coupons_11[3])*50*exp(-(r_13_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[3])*50*exp(-(r_13_0.5*as.numeric(time_to_maturity[2]))))/((as.numeric(coupons_11[3])/2)*100+100))/as.numeric(time_to_maturity[3])
+r_13_1
+r_14_1 <- -log((as.numeric(d_14[3])-as.numeric(coupons_11[3])*50*exp(-(r_14_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[3])*50*exp(-(r_14_0.5*as.numeric(time_to_maturity[2]))))/((as.numeric(coupons_11[3])/2)*100+100))/as.numeric(time_to_maturity[3])
+r_14_1
+r_17_1 <- -log((as.numeric(d_17[3])-as.numeric(coupons_11[3])*50*exp(-(r_17_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[3])*50*exp(-(r_17_0.5*as.numeric(time_to_maturity[2]))))/((as.numeric(coupons_11[3])/2)*100+100))/as.numeric(time_to_maturity[3])
+r_17_1
+r_18_1 <- -log((as.numeric(d_18[3])-as.numeric(coupons_11[3])*50*exp(-(r_18_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[3])*50*exp(-(r_18_0.5*as.numeric(time_to_maturity[2]))))/((as.numeric(coupons_11[3])/2)*100+100))/as.numeric(time_to_maturity[3])
+r_18_1
+r_19_1 <- -log((as.numeric(d_19[3])-as.numeric(coupons_11[3])*50*exp(-(r_19_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[3])*50*exp(-(r_19_0.5*as.numeric(time_to_maturity[2]))))/((as.numeric(coupons_11[3])/2)*100+100))/as.numeric(time_to_maturity[3])
+r_19_1
+r_20_1 <- -log((as.numeric(d_20[3])-as.numeric(coupons_11[3])*50*exp(-(r_20_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[3])*50*exp(-(r_20_0.5*as.numeric(time_to_maturity[2]))))/((as.numeric(coupons_11[3])/2)*100+100))/as.numeric(time_to_maturity[3])
+r_20_1
+r_21_1 <- -log((as.numeric(d_21[3])-as.numeric(coupons_11[3])*50*exp(-(r_21_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[3])*50*exp(-(r_21_0.5*as.numeric(time_to_maturity[2]))))/((as.numeric(coupons_11[3])/2)*100+100))/as.numeric(time_to_maturity[3])
+r_21_1
+```
+
+
+```{r}
+r_10_1.5 <- -log((as.numeric(d_10[4])-as.numeric(coupons_11[4])*50*exp(-(r_10_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[4])*50*exp(-(r_10_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[4])*50*exp(-(r_10_1*as.numeric(time_to_maturity[3]))))/((as.numeric(coupons_11[4])/2)*100+100))/as.numeric(time_to_maturity[4])
+r_10_1.5
+r_11_1.5 <- -log((as.numeric(d_11[4])-as.numeric(coupons_11[4])*50*exp(-(r_11_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[4])*50*exp(-(r_11_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[4])*50*exp(-(r_11_1*as.numeric(time_to_maturity[3]))))/((as.numeric(coupons_11[4])/2)*100+100))/as.numeric(time_to_maturity[4])
+r_11_1.5
+r_12_1.5 <- -log((as.numeric(d_12[4])-as.numeric(coupons_11[4])*50*exp(-(r_12_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[4])*50*exp(-(r_12_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[4])*50*exp(-(r_12_1*as.numeric(time_to_maturity[3]))))/((as.numeric(coupons_11[4])/2)*100+100))/as.numeric(time_to_maturity[4])
+r_12_1.5
+r_13_1.5 <- -log((as.numeric(d_13[4])-as.numeric(coupons_11[4])*50*exp(-(r_13_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[4])*50*exp(-(r_13_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[4])*50*exp(-(r_13_1*as.numeric(time_to_maturity[3]))))/((as.numeric(coupons_11[4])/2)*100+100))/as.numeric(time_to_maturity[4])
+r_13_1.5
+r_14_1.5 <- -log((as.numeric(d_14[4])-as.numeric(coupons_11[4])*50*exp(-(r_14_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[4])*50*exp(-(r_14_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[4])*50*exp(-(r_14_1*as.numeric(time_to_maturity[3]))))/((as.numeric(coupons_11[4])/2)*100+100))/as.numeric(time_to_maturity[4])
+r_14_1.5
+r_17_1.5 <- -log((as.numeric(d_17[4])-as.numeric(coupons_11[4])*50*exp(-(r_17_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[4])*50*exp(-(r_17_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[4])*50*exp(-(r_17_1*as.numeric(time_to_maturity[3]))))/((as.numeric(coupons_11[4])/2)*100+100))/as.numeric(time_to_maturity[4])
+r_17_1.5
+r_18_1.5 <- -log((as.numeric(d_18[4])-as.numeric(coupons_11[4])*50*exp(-(r_18_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[4])*50*exp(-(r_18_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[4])*50*exp(-(r_18_1*as.numeric(time_to_maturity[3]))))/((as.numeric(coupons_11[4])/2)*100+100))/as.numeric(time_to_maturity[4])
+r_18_1.5
+r_19_1.5 <- -log((as.numeric(d_19[4])-as.numeric(coupons_11[4])*50*exp(-(r_19_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[4])*50*exp(-(r_19_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[4])*50*exp(-(r_19_1*as.numeric(time_to_maturity[3]))))/((as.numeric(coupons_11[4])/2)*100+100))/as.numeric(time_to_maturity[4])
+r_19_1.5
+r_20_1.5 <- -log((as.numeric(d_20[4])-as.numeric(coupons_11[4])*50*exp(-(r_20_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[4])*50*exp(-(r_20_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[4])*50*exp(-(r_20_1*as.numeric(time_to_maturity[3]))))/((as.numeric(coupons_11[4])/2)*100+100))/as.numeric(time_to_maturity[4])
+r_20_1.5
+r_21_1.5 <- -log((as.numeric(d_21[4])-as.numeric(coupons_11[4])*50*exp(-(r_21_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[4])*50*exp(-(r_21_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[4])*50*exp(-(r_21_1*as.numeric(time_to_maturity[3]))))/((as.numeric(coupons_11[4])/2)*100+100))/as.numeric(time_to_maturity[4])
+r_21_1.5
+```
+
+```{r}
+r_10_2 <- -log((as.numeric(d_10[5])-as.numeric(coupons_11[5])*50*exp(-(r_10_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[5])*50*exp(-(r_10_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[5])*50*exp(-(r_10_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[5])*50*exp(-(r_10_1.5*as.numeric(time_to_maturity[4]))))/((as.numeric(coupons_11[5])/2)*100+100))/as.numeric(time_to_maturity[5])
+r_10_2
+r_11_2 <- -log((as.numeric(d_11[5])-as.numeric(coupons_11[5])*50*exp(-(r_11_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[5])*50*exp(-(r_11_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[5])*50*exp(-(r_11_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[5])*50*exp(-(r_11_1.5*as.numeric(time_to_maturity[4]))))/((as.numeric(coupons_11[5])/2)*100+100))/as.numeric(time_to_maturity[5])
+r_11_2
+r_12_2 <- -log((as.numeric(d_12[5])-as.numeric(coupons_11[5])*50*exp(-(r_12_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[5])*50*exp(-(r_12_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[5])*50*exp(-(r_12_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[5])*50*exp(-(r_12_1.5*as.numeric(time_to_maturity[4]))))/((as.numeric(coupons_11[5])/2)*100+100))/as.numeric(time_to_maturity[5])
+r_12_2
+r_13_2 <- -log((as.numeric(d_13[5])-as.numeric(coupons_11[5])*50*exp(-(r_13_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[5])*50*exp(-(r_13_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[5])*50*exp(-(r_13_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[5])*50*exp(-(r_13_1.5*as.numeric(time_to_maturity[4]))))/((as.numeric(coupons_11[5])/2)*100+100))/as.numeric(time_to_maturity[5])
+r_13_2
+r_14_2 <- -log((as.numeric(d_14[5])-as.numeric(coupons_11[5])*50*exp(-(r_14_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[5])*50*exp(-(r_14_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[5])*50*exp(-(r_14_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[5])*50*exp(-(r_14_1.5*as.numeric(time_to_maturity[4]))))/((as.numeric(coupons_11[5])/2)*100+100))/as.numeric(time_to_maturity[5])
+r_14_2
+r_17_2 <- -log((as.numeric(d_17[5])-as.numeric(coupons_11[5])*50*exp(-(r_17_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[5])*50*exp(-(r_17_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[5])*50*exp(-(r_17_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[5])*50*exp(-(r_17_1.5*as.numeric(time_to_maturity[4]))))/((as.numeric(coupons_11[5])/2)*100+100))/as.numeric(time_to_maturity[5])
+r_17_2
+r_18_2 <- -log((as.numeric(d_18[5])-as.numeric(coupons_11[5])*50*exp(-(r_18_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[5])*50*exp(-(r_18_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[5])*50*exp(-(r_18_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[5])*50*exp(-(r_18_1.5*as.numeric(time_to_maturity[4]))))/((as.numeric(coupons_11[5])/2)*100+100))/as.numeric(time_to_maturity[5])
+r_18_2
+r_19_2 <- -log((as.numeric(d_19[5])-as.numeric(coupons_11[5])*50*exp(-(r_19_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[5])*50*exp(-(r_19_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[5])*50*exp(-(r_19_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[5])*50*exp(-(r_19_1.5*as.numeric(time_to_maturity[4]))))/((as.numeric(coupons_11[5])/2)*100+100))/as.numeric(time_to_maturity[5])
+r_19_2
+r_20_2 <- -log((as.numeric(d_20[5])-as.numeric(coupons_11[5])*50*exp(-(r_20_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[5])*50*exp(-(r_20_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[5])*50*exp(-(r_20_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[5])*50*exp(-(r_20_1.5*as.numeric(time_to_maturity[4]))))/((as.numeric(coupons_11[5])/2)*100+100))/as.numeric(time_to_maturity[5])
+r_20_2
+r_21_2 <- -log((as.numeric(d_21[5])-as.numeric(coupons_11[5])*50*exp(-(r_21_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[5])*50*exp(-(r_21_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[5])*50*exp(-(r_21_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[5])*50*exp(-(r_21_1.5*as.numeric(time_to_maturity[4]))))/((as.numeric(coupons_11[5])/2)*100+100))/as.numeric(time_to_maturity[5])
+r_21_2
+```
+
+```{r}
+r_10_2.5 <- -log((as.numeric(d_10[6])-as.numeric(coupons_11[6])*50*exp(-(r_10_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[6])*50*exp(-(r_10_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[6])*50*exp(-(r_10_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[6])*50*exp(-(r_10_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[6])*50*exp(-(r_10_2*as.numeric(time_to_maturity[5]))))/((as.numeric(coupons_11[6])/2)*100+100))/as.numeric(time_to_maturity[6])
+r_10_2.5
+r_11_2.5 <- -log((as.numeric(d_11[6])-as.numeric(coupons_11[6])*50*exp(-(r_11_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[6])*50*exp(-(r_11_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[6])*50*exp(-(r_11_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[6])*50*exp(-(r_11_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[6])*50*exp(-(r_11_2*as.numeric(time_to_maturity[5]))))/((as.numeric(coupons_11[6])/2)*100+100))/as.numeric(time_to_maturity[6])
+r_11_2.5
+r_12_2.5 <- -log((as.numeric(d_12[6])-as.numeric(coupons_11[6])*50*exp(-(r_12_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[6])*50*exp(-(r_12_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[6])*50*exp(-(r_12_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[6])*50*exp(-(r_12_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[6])*50*exp(-(r_12_2*as.numeric(time_to_maturity[5]))))/((as.numeric(coupons_11[6])/2)*100+100))/as.numeric(time_to_maturity[6])
+r_12_2.5
+r_13_2.5 <- -log((as.numeric(d_13[6])-as.numeric(coupons_11[6])*50*exp(-(r_13_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[6])*50*exp(-(r_13_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[6])*50*exp(-(r_13_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[6])*50*exp(-(r_13_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[6])*50*exp(-(r_13_2*as.numeric(time_to_maturity[5]))))/((as.numeric(coupons_11[6])/2)*100+100))/as.numeric(time_to_maturity[6])
+r_13_2.5
+r_14_2.5 <- -log((as.numeric(d_14[6])-as.numeric(coupons_11[6])*50*exp(-(r_14_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[6])*50*exp(-(r_14_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[6])*50*exp(-(r_14_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[6])*50*exp(-(r_14_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[6])*50*exp(-(r_14_2*as.numeric(time_to_maturity[5]))))/((as.numeric(coupons_11[6])/2)*100+100))/as.numeric(time_to_maturity[6])
+r_14_2.5
+r_17_2.5 <- -log((as.numeric(d_17[6])-as.numeric(coupons_11[6])*50*exp(-(r_17_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[6])*50*exp(-(r_17_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[6])*50*exp(-(r_17_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[6])*50*exp(-(r_17_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[6])*50*exp(-(r_17_2*as.numeric(time_to_maturity[5]))))/((as.numeric(coupons_11[6])/2)*100+100))/as.numeric(time_to_maturity[6])
+r_17_2.5
+r_18_2.5 <- -log((as.numeric(d_18[6])-as.numeric(coupons_11[6])*50*exp(-(r_18_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[6])*50*exp(-(r_18_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[6])*50*exp(-(r_18_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[6])*50*exp(-(r_18_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[6])*50*exp(-(r_18_2*as.numeric(time_to_maturity[5]))))/((as.numeric(coupons_11[6])/2)*100+100))/as.numeric(time_to_maturity[6])
+r_18_2.5
+r_19_2.5 <- -log((as.numeric(d_19[6])-as.numeric(coupons_11[6])*50*exp(-(r_19_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[6])*50*exp(-(r_19_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[6])*50*exp(-(r_19_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[6])*50*exp(-(r_19_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[6])*50*exp(-(r_19_2*as.numeric(time_to_maturity[5]))))/((as.numeric(coupons_11[6])/2)*100+100))/as.numeric(time_to_maturity[6])
+r_19_2.5
+r_20_2.5 <- -log((as.numeric(d_20[6])-as.numeric(coupons_11[6])*50*exp(-(r_20_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[6])*50*exp(-(r_20_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[6])*50*exp(-(r_20_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[6])*50*exp(-(r_20_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[6])*50*exp(-(r_20_2*as.numeric(time_to_maturity[5]))))/((as.numeric(coupons_11[6])/2)*100+100))/as.numeric(time_to_maturity[6])
+r_20_2.5
+r_21_2.5 <- -log((as.numeric(d_21[6])-as.numeric(coupons_11[6])*50*exp(-(r_21_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[6])*50*exp(-(r_21_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[6])*50*exp(-(r_21_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[6])*50*exp(-(r_21_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[6])*50*exp(-(r_21_2*as.numeric(time_to_maturity[5]))))/((as.numeric(coupons_11[6])/2)*100+100))/as.numeric(time_to_maturity[6])
+r_21_2.5
+```
+
+```{r}
+r_10_3 <- -log((as.numeric(d_10[7])-as.numeric(coupons_11[7])*50*exp(-(r_10_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[7])*50*exp(-(r_10_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[7])*50*exp(-(r_10_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[7])*50*exp(-(r_10_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[7])*50*exp(-(r_10_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[7])*50*exp(-(r_10_2.5*as.numeric(time_to_maturity[6]))))/((as.numeric(coupons_11[7])/2)*100+100))/as.numeric(time_to_maturity[7])
+r_10_3
+r_11_3 <- -log((as.numeric(d_11[7])-as.numeric(coupons_11[7])*50*exp(-(r_11_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[7])*50*exp(-(r_11_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[7])*50*exp(-(r_11_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[7])*50*exp(-(r_11_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[7])*50*exp(-(r_11_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[7])*50*exp(-(r_11_2.5*as.numeric(time_to_maturity[6]))))/((as.numeric(coupons_11[7])/2)*100+100))/as.numeric(time_to_maturity[7])
+r_11_3
+r_12_3 <- -log((as.numeric(d_12[7])-as.numeric(coupons_11[7])*50*exp(-(r_12_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[7])*50*exp(-(r_12_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[7])*50*exp(-(r_12_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[7])*50*exp(-(r_12_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[7])*50*exp(-(r_12_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[7])*50*exp(-(r_12_2.5*as.numeric(time_to_maturity[6]))))/((as.numeric(coupons_11[7])/2)*100+100))/as.numeric(time_to_maturity[7])
+r_12_3
+r_13_3 <- -log((as.numeric(d_13[7])-as.numeric(coupons_11[7])*50*exp(-(r_13_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[7])*50*exp(-(r_13_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[7])*50*exp(-(r_13_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[7])*50*exp(-(r_13_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[7])*50*exp(-(r_13_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[7])*50*exp(-(r_13_2.5*as.numeric(time_to_maturity[6]))))/((as.numeric(coupons_11[7])/2)*100+100))/as.numeric(time_to_maturity[7])
+r_13_3
+r_14_3 <- -log((as.numeric(d_14[7])-as.numeric(coupons_11[7])*50*exp(-(r_14_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[7])*50*exp(-(r_14_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[7])*50*exp(-(r_14_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[7])*50*exp(-(r_14_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[7])*50*exp(-(r_14_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[7])*50*exp(-(r_14_2.5*as.numeric(time_to_maturity[6]))))/((as.numeric(coupons_11[7])/2)*100+100))/as.numeric(time_to_maturity[7])
+r_14_3
+r_17_3 <- -log((as.numeric(d_17[7])-as.numeric(coupons_11[7])*50*exp(-(r_17_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[7])*50*exp(-(r_17_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[7])*50*exp(-(r_17_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[7])*50*exp(-(r_17_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[7])*50*exp(-(r_17_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[7])*50*exp(-(r_17_2.5*as.numeric(time_to_maturity[6]))))/((as.numeric(coupons_11[7])/2)*100+100))/as.numeric(time_to_maturity[7])
+r_17_3
+r_18_3 <- -log((as.numeric(d_18[7])-as.numeric(coupons_11[7])*50*exp(-(r_18_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[7])*50*exp(-(r_18_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[7])*50*exp(-(r_18_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[7])*50*exp(-(r_18_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[7])*50*exp(-(r_18_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[7])*50*exp(-(r_18_2.5*as.numeric(time_to_maturity[6]))))/((as.numeric(coupons_11[7])/2)*100+100))/as.numeric(time_to_maturity[7])
+r_18_3
+r_19_3 <- -log((as.numeric(d_19[7])-as.numeric(coupons_11[7])*50*exp(-(r_19_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[7])*50*exp(-(r_19_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[7])*50*exp(-(r_19_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[7])*50*exp(-(r_19_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[7])*50*exp(-(r_19_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[7])*50*exp(-(r_19_2.5*as.numeric(time_to_maturity[6]))))/((as.numeric(coupons_11[7])/2)*100+100))/as.numeric(time_to_maturity[7])
+r_19_3
+r_20_3 <- -log((as.numeric(d_20[7])-as.numeric(coupons_11[7])*50*exp(-(r_20_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[7])*50*exp(-(r_20_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[7])*50*exp(-(r_20_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[7])*50*exp(-(r_20_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[7])*50*exp(-(r_20_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[7])*50*exp(-(r_20_2.5*as.numeric(time_to_maturity[6]))))/((as.numeric(coupons_11[7])/2)*100+100))/as.numeric(time_to_maturity[7])
+r_20_3
+r_21_3 <- -log((as.numeric(d_21[7])-as.numeric(coupons_11[7])*50*exp(-(r_21_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[7])*50*exp(-(r_21_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[7])*50*exp(-(r_21_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[7])*50*exp(-(r_21_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[7])*50*exp(-(r_21_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[7])*50*exp(-(r_21_2.5*as.numeric(time_to_maturity[6]))))/((as.numeric(coupons_11[7])/2)*100+100))/as.numeric(time_to_maturity[7])
+r_21_3
+```
+```{r}
+r_10_3.5 <- -log((as.numeric(d_10[8])-as.numeric(coupons_11[8])*50*exp(-(r_10_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[8])*50*exp(-(r_10_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[8])*50*exp(-(r_10_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[8])*50*exp(-(r_10_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[8])*50*exp(-(r_10_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[8])*50*exp(-(r_10_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[8])*50*exp(-(r_10_3*as.numeric(time_to_maturity[7]))))/((as.numeric(coupons_11[8])/2)*100+100))/as.numeric(time_to_maturity[8])
+r_10_3.5
+r_11_3.5 <- -log((as.numeric(d_11[8])-as.numeric(coupons_11[8])*50*exp(-(r_11_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[8])*50*exp(-(r_11_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[8])*50*exp(-(r_11_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[8])*50*exp(-(r_11_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[8])*50*exp(-(r_11_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[8])*50*exp(-(r_11_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[8])*50*exp(-(r_11_3*as.numeric(time_to_maturity[7]))))/((as.numeric(coupons_11[8])/2)*100+100))/as.numeric(time_to_maturity[8])
+r_11_3.5
+r_12_3.5 <- -log((as.numeric(d_12[8])-as.numeric(coupons_11[8])*50*exp(-(r_12_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[8])*50*exp(-(r_12_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[8])*50*exp(-(r_12_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[8])*50*exp(-(r_12_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[8])*50*exp(-(r_12_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[8])*50*exp(-(r_12_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[8])*50*exp(-(r_12_3*as.numeric(time_to_maturity[7]))))/((as.numeric(coupons_11[8])/2)*100+100))/as.numeric(time_to_maturity[8])
+r_12_3.5
+r_13_3.5 <- -log((as.numeric(d_13[8])-as.numeric(coupons_11[8])*50*exp(-(r_13_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[8])*50*exp(-(r_13_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[8])*50*exp(-(r_13_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[8])*50*exp(-(r_13_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[8])*50*exp(-(r_13_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[8])*50*exp(-(r_13_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[8])*50*exp(-(r_13_3*as.numeric(time_to_maturity[7]))))/((as.numeric(coupons_11[8])/2)*100+100))/as.numeric(time_to_maturity[8])
+r_13_3.5
+r_14_3.5 <- -log((as.numeric(d_14[8])-as.numeric(coupons_11[8])*50*exp(-(r_14_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[8])*50*exp(-(r_14_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[8])*50*exp(-(r_14_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[8])*50*exp(-(r_14_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[8])*50*exp(-(r_14_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[8])*50*exp(-(r_14_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[8])*50*exp(-(r_14_3*as.numeric(time_to_maturity[7]))))/((as.numeric(coupons_11[8])/2)*100+100))/as.numeric(time_to_maturity[8])
+r_14_3.5
+r_17_3.5 <- -log((as.numeric(d_17[8])-as.numeric(coupons_11[8])*50*exp(-(r_17_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[8])*50*exp(-(r_17_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[8])*50*exp(-(r_17_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[8])*50*exp(-(r_17_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[8])*50*exp(-(r_17_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[8])*50*exp(-(r_17_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[8])*50*exp(-(r_17_3*as.numeric(time_to_maturity[7]))))/((as.numeric(coupons_11[8])/2)*100+100))/as.numeric(time_to_maturity[8])
+r_17_3.5
+r_18_3.5 <- -log((as.numeric(d_18[8])-as.numeric(coupons_11[8])*50*exp(-(r_18_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[8])*50*exp(-(r_18_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[8])*50*exp(-(r_18_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[8])*50*exp(-(r_18_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[8])*50*exp(-(r_18_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[8])*50*exp(-(r_18_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[8])*50*exp(-(r_18_3*as.numeric(time_to_maturity[7]))))/((as.numeric(coupons_11[8])/2)*100+100))/as.numeric(time_to_maturity[8])
+r_18_3.5
+r_19_3.5 <- -log((as.numeric(d_19[8])-as.numeric(coupons_11[8])*50*exp(-(r_19_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[8])*50*exp(-(r_19_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[8])*50*exp(-(r_19_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[8])*50*exp(-(r_19_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[8])*50*exp(-(r_19_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[8])*50*exp(-(r_19_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[8])*50*exp(-(r_19_3*as.numeric(time_to_maturity[7]))))/((as.numeric(coupons_11[8])/2)*100+100))/as.numeric(time_to_maturity[8])
+r_19_3.5
+r_20_3.5 <- -log((as.numeric(d_20[8])-as.numeric(coupons_11[8])*50*exp(-(r_20_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[8])*50*exp(-(r_20_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[8])*50*exp(-(r_20_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[8])*50*exp(-(r_20_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[8])*50*exp(-(r_20_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[8])*50*exp(-(r_20_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[8])*50*exp(-(r_20_3*as.numeric(time_to_maturity[7]))))/((as.numeric(coupons_11[8])/2)*100+100))/as.numeric(time_to_maturity[8])
+r_20_3.5
+r_21_3.5 <- -log((as.numeric(d_21[8])-as.numeric(coupons_11[8])*50*exp(-(r_21_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[8])*50*exp(-(r_21_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[8])*50*exp(-(r_21_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[8])*50*exp(-(r_21_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[8])*50*exp(-(r_21_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[8])*50*exp(-(r_21_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[8])*50*exp(-(r_21_3*as.numeric(time_to_maturity[7]))))/((as.numeric(coupons_11[8])/2)*100+100))/as.numeric(time_to_maturity[8])
+r_21_3.5
+```
+
+```{r}
+r_10_4 <- -log((as.numeric(d_10[9])-as.numeric(coupons_11[9])*50*exp(-(r_10_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[9])*50*exp(-(r_10_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[9])*50*exp(-(r_10_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[9])*50*exp(-(r_10_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[9])*50*exp(-(r_10_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[9])*50*exp(-(r_10_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[9])*50*exp(-(r_10_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[9])*50*exp(-(r_10_3.5*as.numeric(time_to_maturity[8]))))/((as.numeric(coupons_11[9])/2)*100+100))/as.numeric(time_to_maturity[9])
+r_10_4
+r_11_4 <- -log((as.numeric(d_11[9])-as.numeric(coupons_11[9])*50*exp(-(r_11_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[9])*50*exp(-(r_11_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[9])*50*exp(-(r_11_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[9])*50*exp(-(r_11_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[9])*50*exp(-(r_11_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[9])*50*exp(-(r_11_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[9])*50*exp(-(r_11_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[9])*50*exp(-(r_11_3.5*as.numeric(time_to_maturity[8]))))/((as.numeric(coupons_11[9])/2)*100+100))/as.numeric(time_to_maturity[9])
+r_11_4
+r_12_4 <- -log((as.numeric(d_12[9])-as.numeric(coupons_11[9])*50*exp(-(r_12_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[9])*50*exp(-(r_12_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[9])*50*exp(-(r_12_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[9])*50*exp(-(r_12_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[9])*50*exp(-(r_12_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[9])*50*exp(-(r_12_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[9])*50*exp(-(r_12_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[9])*50*exp(-(r_12_3.5*as.numeric(time_to_maturity[8]))))/((as.numeric(coupons_11[9])/2)*100+100))/as.numeric(time_to_maturity[9])
+r_12_4
+r_13_4 <- -log((as.numeric(d_13[9])-as.numeric(coupons_11[9])*50*exp(-(r_13_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[9])*50*exp(-(r_13_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[9])*50*exp(-(r_13_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[9])*50*exp(-(r_13_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[9])*50*exp(-(r_13_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[9])*50*exp(-(r_13_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[9])*50*exp(-(r_13_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[9])*50*exp(-(r_13_3.5*as.numeric(time_to_maturity[8]))))/((as.numeric(coupons_11[9])/2)*100+100))/as.numeric(time_to_maturity[9])
+r_13_4
+r_14_4 <- -log((as.numeric(d_14[9])-as.numeric(coupons_11[9])*50*exp(-(r_14_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[9])*50*exp(-(r_14_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[9])*50*exp(-(r_14_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[9])*50*exp(-(r_14_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[9])*50*exp(-(r_14_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[9])*50*exp(-(r_14_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[9])*50*exp(-(r_14_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[9])*50*exp(-(r_14_3.5*as.numeric(time_to_maturity[8]))))/((as.numeric(coupons_11[9])/2)*100+100))/as.numeric(time_to_maturity[9])
+r_14_4
+r_17_4 <- -log((as.numeric(d_17[9])-as.numeric(coupons_11[9])*50*exp(-(r_17_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[9])*50*exp(-(r_17_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[9])*50*exp(-(r_17_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[9])*50*exp(-(r_17_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[9])*50*exp(-(r_17_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[9])*50*exp(-(r_17_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[9])*50*exp(-(r_17_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[9])*50*exp(-(r_17_3.5*as.numeric(time_to_maturity[8]))))/((as.numeric(coupons_11[9])/2)*100+100))/as.numeric(time_to_maturity[9])
+r_17_4
+r_18_4 <- -log((as.numeric(d_18[9])-as.numeric(coupons_11[9])*50*exp(-(r_18_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[9])*50*exp(-(r_18_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[9])*50*exp(-(r_18_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[9])*50*exp(-(r_18_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[9])*50*exp(-(r_18_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[9])*50*exp(-(r_18_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[9])*50*exp(-(r_18_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[9])*50*exp(-(r_18_3.5*as.numeric(time_to_maturity[8]))))/((as.numeric(coupons_11[9])/2)*100+100))/as.numeric(time_to_maturity[9])
+r_18_4
+r_19_4 <- -log((as.numeric(d_19[9])-as.numeric(coupons_11[9])*50*exp(-(r_19_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[9])*50*exp(-(r_19_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[9])*50*exp(-(r_19_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[9])*50*exp(-(r_19_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[9])*50*exp(-(r_19_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[9])*50*exp(-(r_19_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[9])*50*exp(-(r_19_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[9])*50*exp(-(r_19_3.5*as.numeric(time_to_maturity[8]))))/((as.numeric(coupons_11[9])/2)*100+100))/as.numeric(time_to_maturity[9])
+r_19_4
+r_20_4 <- -log((as.numeric(d_20[9])-as.numeric(coupons_11[9])*50*exp(-(r_20_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[9])*50*exp(-(r_20_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[9])*50*exp(-(r_20_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[9])*50*exp(-(r_20_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[9])*50*exp(-(r_20_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[9])*50*exp(-(r_20_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[9])*50*exp(-(r_20_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[9])*50*exp(-(r_20_3.5*as.numeric(time_to_maturity[8]))))/((as.numeric(coupons_11[9])/2)*100+100))/as.numeric(time_to_maturity[9])
+r_20_4
+r_21_4 <- -log((as.numeric(d_21[9])-as.numeric(coupons_11[9])*50*exp(-(r_21_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[9])*50*exp(-(r_21_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[9])*50*exp(-(r_21_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[9])*50*exp(-(r_21_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[9])*50*exp(-(r_21_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[9])*50*exp(-(r_21_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[9])*50*exp(-(r_21_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[9])*50*exp(-(r_21_3.5*as.numeric(time_to_maturity[8]))))/((as.numeric(coupons_11[9])/2)*100+100))/as.numeric(time_to_maturity[9])
+r_21_4
+```
+
+
+```{r}
+r_10_4.5 <- -log((as.numeric(d_10[10])-as.numeric(coupons_11[10])*50*exp(-(r_10_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[10])*50*exp(-(r_10_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[10])*50*exp(-(r_10_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[10])*50*exp(-(r_10_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[10])*50*exp(-(r_10_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[10])*50*exp(-(r_10_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[10])*50*exp(-(r_10_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[10])*50*exp(-(r_10_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[10])*50*exp(-(r_10_4*as.numeric(time_to_maturity[9]))))/((as.numeric(coupons_11[10])/2)*100+100))/as.numeric(time_to_maturity[10])
+r_10_4.5
+r_11_4.5 <- -log((as.numeric(d_11[10])-as.numeric(coupons_11[10])*50*exp(-(r_11_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[10])*50*exp(-(r_11_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[10])*50*exp(-(r_11_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[10])*50*exp(-(r_11_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[10])*50*exp(-(r_11_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[10])*50*exp(-(r_11_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[10])*50*exp(-(r_11_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[10])*50*exp(-(r_11_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[10])*50*exp(-(r_11_4*as.numeric(time_to_maturity[9]))))/((as.numeric(coupons_11[10])/2)*100+100))/as.numeric(time_to_maturity[10])
+r_11_4.5
+r_12_4.5 <- -log((as.numeric(d_12[10])-as.numeric(coupons_11[10])*50*exp(-(r_12_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[10])*50*exp(-(r_12_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[10])*50*exp(-(r_12_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[10])*50*exp(-(r_12_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[10])*50*exp(-(r_12_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[10])*50*exp(-(r_12_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[10])*50*exp(-(r_12_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[10])*50*exp(-(r_12_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[10])*50*exp(-(r_12_4*as.numeric(time_to_maturity[9]))))/((as.numeric(coupons_11[10])/2)*100+100))/as.numeric(time_to_maturity[10])
+r_12_4.5
+r_13_4.5 <- -log((as.numeric(d_13[10])-as.numeric(coupons_11[10])*50*exp(-(r_13_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[10])*50*exp(-(r_13_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[10])*50*exp(-(r_13_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[10])*50*exp(-(r_13_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[10])*50*exp(-(r_13_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[10])*50*exp(-(r_13_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[10])*50*exp(-(r_13_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[10])*50*exp(-(r_13_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[10])*50*exp(-(r_13_4*as.numeric(time_to_maturity[9]))))/((as.numeric(coupons_11[10])/2)*100+100))/as.numeric(time_to_maturity[10])
+r_13_4.5
+r_14_4.5 <- -log((as.numeric(d_14[10])-as.numeric(coupons_11[10])*50*exp(-(r_14_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[10])*50*exp(-(r_14_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[10])*50*exp(-(r_14_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[10])*50*exp(-(r_14_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[10])*50*exp(-(r_14_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[10])*50*exp(-(r_14_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[10])*50*exp(-(r_14_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[10])*50*exp(-(r_14_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[10])*50*exp(-(r_14_4*as.numeric(time_to_maturity[9]))))/((as.numeric(coupons_11[10])/2)*100+100))/as.numeric(time_to_maturity[10])
+r_14_4.5
+r_17_4.5 <- -log((as.numeric(d_17[10])-as.numeric(coupons_11[10])*50*exp(-(r_17_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[10])*50*exp(-(r_17_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[10])*50*exp(-(r_17_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[10])*50*exp(-(r_17_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[10])*50*exp(-(r_17_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[10])*50*exp(-(r_17_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[10])*50*exp(-(r_17_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[10])*50*exp(-(r_17_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[10])*50*exp(-(r_17_4*as.numeric(time_to_maturity[9]))))/((as.numeric(coupons_11[10])/2)*100+100))/as.numeric(time_to_maturity[10])
+r_17_4.5
+r_18_4.5 <- -log((as.numeric(d_18[10])-as.numeric(coupons_11[10])*50*exp(-(r_18_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[10])*50*exp(-(r_18_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[10])*50*exp(-(r_18_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[10])*50*exp(-(r_18_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[10])*50*exp(-(r_18_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[10])*50*exp(-(r_18_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[10])*50*exp(-(r_18_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[10])*50*exp(-(r_18_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[10])*50*exp(-(r_18_4*as.numeric(time_to_maturity[9]))))/((as.numeric(coupons_11[10])/2)*100+100))/as.numeric(time_to_maturity[10])
+r_18_4.5
+r_19_4.5 <- -log((as.numeric(d_19[10])-as.numeric(coupons_11[10])*50*exp(-(r_19_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[10])*50*exp(-(r_19_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[10])*50*exp(-(r_19_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[10])*50*exp(-(r_19_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[10])*50*exp(-(r_19_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[10])*50*exp(-(r_19_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[10])*50*exp(-(r_19_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[10])*50*exp(-(r_19_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[10])*50*exp(-(r_19_4*as.numeric(time_to_maturity[9]))))/((as.numeric(coupons_11[10])/2)*100+100))/as.numeric(time_to_maturity[10])
+r_19_4.5
+r_20_4.5 <- -log((as.numeric(d_20[10])-as.numeric(coupons_11[10])*50*exp(-(r_20_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[10])*50*exp(-(r_20_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[10])*50*exp(-(r_20_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[10])*50*exp(-(r_20_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[10])*50*exp(-(r_20_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[10])*50*exp(-(r_20_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[10])*50*exp(-(r_20_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[10])*50*exp(-(r_20_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[10])*50*exp(-(r_20_4*as.numeric(time_to_maturity[9]))))/((as.numeric(coupons_11[10])/2)*100+100))/as.numeric(time_to_maturity[10])
+r_20_4.5
+r_21_4.5 <- -log((as.numeric(d_21[10])-as.numeric(coupons_11[10])*50*exp(-(r_21_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[10])*50*exp(-(r_21_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[10])*50*exp(-(r_21_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[10])*50*exp(-(r_21_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[10])*50*exp(-(r_21_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[10])*50*exp(-(r_21_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[10])*50*exp(-(r_21_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[10])*50*exp(-(r_21_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[10])*50*exp(-(r_21_4*as.numeric(time_to_maturity[9]))))/((as.numeric(coupons_11[10])/2)*100+100))/as.numeric(time_to_maturity[10])
+r_21_4.5
+```
+
+
+```{r}
+r_10_5 <- -log((as.numeric(d_10[11])-as.numeric(coupons_11[11])*50*exp(-(r_10_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[11])*50*exp(-(r_10_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[11])*50*exp(-(r_10_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[11])*50*exp(-(r_10_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[11])*50*exp(-(r_10_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[11])*50*exp(-(r_10_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[11])*50*exp(-(r_10_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[11])*50*exp(-(r_10_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[11])*50*exp(-(r_10_4*as.numeric(time_to_maturity[9])))-as.numeric(coupons_11[11])*50*exp(-(r_10_4.5*as.numeric(time_to_maturity[10]))))/((as.numeric(coupons_11[11])/2)*100+100))/as.numeric(time_to_maturity[11])
+r_10_5
+r_11_5 <- -log((as.numeric(d_11[11])-as.numeric(coupons_11[11])*50*exp(-(r_11_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[11])*50*exp(-(r_11_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[11])*50*exp(-(r_11_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[11])*50*exp(-(r_11_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[11])*50*exp(-(r_11_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[11])*50*exp(-(r_11_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[11])*50*exp(-(r_11_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[11])*50*exp(-(r_11_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[11])*50*exp(-(r_11_4*as.numeric(time_to_maturity[9])))-as.numeric(coupons_11[11])*50*exp(-(r_11_4.5*as.numeric(time_to_maturity[10]))))/((as.numeric(coupons_11[11])/2)*100+100))/as.numeric(time_to_maturity[11])
+r_11_5
+r_12_5 <- -log((as.numeric(d_12[11])-as.numeric(coupons_11[11])*50*exp(-(r_12_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[11])*50*exp(-(r_12_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[11])*50*exp(-(r_12_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[11])*50*exp(-(r_12_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[11])*50*exp(-(r_12_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[11])*50*exp(-(r_12_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[11])*50*exp(-(r_12_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[11])*50*exp(-(r_12_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[11])*50*exp(-(r_12_4*as.numeric(time_to_maturity[9])))-as.numeric(coupons_11[11])*50*exp(-(r_12_4.5*as.numeric(time_to_maturity[10]))))/((as.numeric(coupons_11[11])/2)*100+100))/as.numeric(time_to_maturity[11])
+r_12_5
+r_13_5 <- -log((as.numeric(d_13[11])-as.numeric(coupons_11[11])*50*exp(-(r_13_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[11])*50*exp(-(r_13_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[11])*50*exp(-(r_13_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[11])*50*exp(-(r_13_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[11])*50*exp(-(r_13_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[11])*50*exp(-(r_13_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[11])*50*exp(-(r_13_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[11])*50*exp(-(r_13_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[11])*50*exp(-(r_13_4*as.numeric(time_to_maturity[9])))-as.numeric(coupons_11[11])*50*exp(-(r_13_4.5*as.numeric(time_to_maturity[10]))))/((as.numeric(coupons_11[11])/2)*100+100))/as.numeric(time_to_maturity[11])
+r_13_5
+r_14_5 <- -log((as.numeric(d_14[11])-as.numeric(coupons_11[11])*50*exp(-(r_14_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[11])*50*exp(-(r_14_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[11])*50*exp(-(r_14_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[11])*50*exp(-(r_14_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[11])*50*exp(-(r_14_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[11])*50*exp(-(r_14_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[11])*50*exp(-(r_14_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[11])*50*exp(-(r_14_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[11])*50*exp(-(r_14_4*as.numeric(time_to_maturity[9])))-as.numeric(coupons_11[11])*50*exp(-(r_14_4.5*as.numeric(time_to_maturity[10]))))/((as.numeric(coupons_11[11])/2)*100+100))/as.numeric(time_to_maturity[11])
+r_14_5
+r_17_5 <- -log((as.numeric(d_17[11])-as.numeric(coupons_11[11])*50*exp(-(r_17_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[11])*50*exp(-(r_17_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[11])*50*exp(-(r_17_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[11])*50*exp(-(r_17_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[11])*50*exp(-(r_17_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[11])*50*exp(-(r_17_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[11])*50*exp(-(r_17_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[11])*50*exp(-(r_17_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[11])*50*exp(-(r_17_4*as.numeric(time_to_maturity[9])))-as.numeric(coupons_11[11])*50*exp(-(r_17_4.5*as.numeric(time_to_maturity[10]))))/((as.numeric(coupons_11[11])/2)*100+100))/as.numeric(time_to_maturity[11])
+r_17_5
+r_18_5 <- -log((as.numeric(d_18[11])-as.numeric(coupons_11[11])*50*exp(-(r_18_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[11])*50*exp(-(r_18_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[11])*50*exp(-(r_18_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[11])*50*exp(-(r_18_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[11])*50*exp(-(r_18_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[11])*50*exp(-(r_18_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[11])*50*exp(-(r_18_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[11])*50*exp(-(r_18_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[11])*50*exp(-(r_18_4*as.numeric(time_to_maturity[9])))-as.numeric(coupons_11[11])*50*exp(-(r_18_4.5*as.numeric(time_to_maturity[10]))))/((as.numeric(coupons_11[11])/2)*100+100))/as.numeric(time_to_maturity[11])
+r_18_5
+r_19_5 <- -log((as.numeric(d_19[11])-as.numeric(coupons_11[11])*50*exp(-(r_19_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[11])*50*exp(-(r_19_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[11])*50*exp(-(r_19_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[11])*50*exp(-(r_19_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[11])*50*exp(-(r_19_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[11])*50*exp(-(r_19_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[11])*50*exp(-(r_19_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[11])*50*exp(-(r_19_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[11])*50*exp(-(r_19_4*as.numeric(time_to_maturity[9])))-as.numeric(coupons_11[11])*50*exp(-(r_19_4.5*as.numeric(time_to_maturity[10]))))/((as.numeric(coupons_11[11])/2)*100+100))/as.numeric(time_to_maturity[11])
+r_19_5
+r_20_5 <- -log((as.numeric(d_20[11])-as.numeric(coupons_11[11])*50*exp(-(r_20_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[11])*50*exp(-(r_20_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[11])*50*exp(-(r_20_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[11])*50*exp(-(r_20_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[11])*50*exp(-(r_20_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[11])*50*exp(-(r_20_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[11])*50*exp(-(r_20_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[11])*50*exp(-(r_20_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[11])*50*exp(-(r_20_4*as.numeric(time_to_maturity[9])))-as.numeric(coupons_11[11])*50*exp(-(r_20_4.5*as.numeric(time_to_maturity[10]))))/((as.numeric(coupons_11[11])/2)*100+100))/as.numeric(time_to_maturity[11])
+r_20_5
+r_21_5 <- -log((as.numeric(d_21[11])-as.numeric(coupons_11[11])*50*exp(-(r_21_0.1*as.numeric(time_to_maturity[1])))-as.numeric(coupons_11[11])*50*exp(-(r_21_0.5*as.numeric(time_to_maturity[2])))-as.numeric(coupons_11[11])*50*exp(-(r_21_1*as.numeric(time_to_maturity[3])))-as.numeric(coupons_11[11])*50*exp(-(r_21_1.5*as.numeric(time_to_maturity[4])))-as.numeric(coupons_11[11])*50*exp(-(r_21_2*as.numeric(time_to_maturity[5])))-as.numeric(coupons_11[11])*50*exp(-(r_21_2.5*as.numeric(time_to_maturity[6])))-as.numeric(coupons_11[11])*50*exp(-(r_21_3*as.numeric(time_to_maturity[7])))-as.numeric(coupons_11[11])*50*exp(-(r_21_3.5*as.numeric(time_to_maturity[8])))-as.numeric(coupons_11[11])*50*exp(-(r_21_4*as.numeric(time_to_maturity[9])))-as.numeric(coupons_11[11])*50*exp(-(r_21_4.5*as.numeric(time_to_maturity[10]))))/((as.numeric(coupons_11[11])/2)*100+100))/as.numeric(time_to_maturity[11])
+r_21_5
+```
+```{r}
+jan_10 <- c(r_10_0.1,r_10_0.5,r_10_1,r_10_1.5,r_10_2,r_10_2.5,r_10_3,r_10_3.5,r_10_4,r_10_4.5,r_10_5)
+jan_11 <- c(r_11_0.1,r_11_0.5,r_11_1,r_11_1.5,r_11_2,r_11_2.5,r_11_3,r_11_3.5,r_11_4,r_11_4.5,r_11_5)
+jan_12 <- c(r_12_0.1,r_12_0.5,r_12_1,r_12_1.5,r_12_2,r_12_2.5,r_12_3,r_12_3.5,r_12_4,r_12_4.5,r_12_5)
+jan_13 <- c(r_13_0.1,r_13_0.5,r_13_1,r_13_1.5,r_13_2,r_13_2.5,r_13_3,r_13_3.5,r_13_4,r_13_4.5,r_13_5)
+jan_14 <- c(r_14_0.1,r_14_0.5,r_14_1,r_14_1.5,r_14_2,r_14_2.5,r_14_3,r_14_3.5,r_14_4,r_14_4.5,r_14_5)
+jan_17 <- c(r_17_0.1,r_17_0.5,r_17_1,r_17_1.5,r_17_2,r_17_2.5,r_17_3,r_17_3.5,r_17_4,r_17_4.5,r_17_5)
+jan_18 <- c(r_18_0.1,r_18_0.5,r_18_1,r_18_1.5,r_18_2,r_18_2.5,r_18_3,r_18_3.5,r_18_4,r_18_4.5,r_18_5)
+jan_19 <- c(r_19_0.1,r_19_0.5,r_19_1,r_19_1.5,r_19_2,r_19_2.5,r_19_3,r_19_3.5,r_19_4,r_19_4.5,r_19_5)
+jan_20 <- c(r_20_0.1,r_20_0.5,r_20_1,r_20_1.5,r_20_2,r_20_2.5,r_20_3,r_20_3.5,r_20_4,r_20_4.5,r_20_5)
+jan_21 <- c(r_21_0.1,r_21_0.5,r_21_1,r_21_1.5,r_21_2,r_21_2.5,r_21_3,r_21_3.5,r_21_4,r_21_4.5,r_21_5)
+colours <- c("orange", "blue", "red", "forestgreen", "yellow", rgb(0.3,0.3,.3),
+                  rgb(0.6,0.3,0), rgb(.9,0,0), 
+                  rgb(0.3,0.6,0), rgb(0.3,0,.6), rgb(0,0.3,.6))
+time <- c(0.1095,0.5288,1.0329,1.5288,2.0329,2.6164,3.36344,3.6164,4.1123,4.5616,5.3644)
+plot(time,jan_10,main = "Spot curve" ,xlim = c(0,5),ylim = c(0.008, 0.024),col = colours[1], xlab="Time to Maturity (in years)",ylab="Sport rates")
+lines(time,jan_10,col = colours[1])
+lines(time,jan_11, col = colours[2])
+lines(time,jan_12, col = colours[3])
+lines(time,jan_13, col = colours[4])
+lines(time,jan_14, col = colours[5])
+lines(time,jan_17, col = colours[6])
+lines(time,jan_18, col = colours[7])
+lines(time,jan_19, col = colours[8])
+lines(time,jan_20, col = colours[9])
+lines(time,jan_21, col = colours[10])
+legend("bottomright", legend = c("Jan-10-2022","Jan-11-2022","Jan-12-2022","Jan-13-2022","Jan-14-2022","Jan-17-2022","Jan-18-2022","Jan-19-2022","Jan-20-2022","Jan-21-2022"),cex=0.6,lty=1, lwd=2, ,col = colours, bg="white")
+
+```
+# forward rates:
+
+```{r}
+jan_10b <- c(r_10_0.5,r_10_1,r_10_1.5,r_10_2,r_10_2.5,r_10_3,r_10_3.5,r_10_4,r_10_4.5)
+jan_11b <- c(r_11_0.5,r_11_1,r_11_1.5,r_11_2,r_11_2.5,r_11_3,r_11_3.5,r_11_4,r_11_4.5)
+jan_12b <- c(r_12_0.5,r_12_1,r_12_1.5,r_12_2,r_12_2.5,r_12_3,r_12_3.5,r_12_4,r_12_4.5)
+jan_13b <- c(r_13_0.5,r_13_1,r_13_1.5,r_13_2,r_13_2.5,r_13_3,r_13_3.5,r_13_4,r_13_4.5)
+jan_14b <- c(r_14_0.5,r_14_1,r_14_1.5,r_14_2,r_14_2.5,r_14_3,r_14_3.5,r_14_4,r_14_4.5)
+jan_17b <- c(r_17_0.5,r_17_1,r_17_1.5,r_17_2,r_17_2.5,r_17_3,r_17_3.5,r_17_4,r_17_4.5)
+jan_18b <- c(r_18_0.5,r_18_1,r_18_1.5,r_18_2,r_18_2.5,r_18_3,r_18_3.5,r_18_4,r_18_4.5)
+jan_19b <- c(r_19_0.5,r_19_1,r_19_1.5,r_19_2,r_19_2.5,r_19_3,r_19_3.5,r_19_4,r_19_4.5)
+jan_20b <- c(r_20_0.5,r_20_1,r_20_1.5,r_20_2,r_20_2.5,r_20_3,r_20_3.5,r_20_4,r_20_4.5)
+jan_21b <- c(r_21_0.5,r_21_1,r_21_1.5,r_21_2,r_21_2.5,r_21_3,r_21_3.5,r_21_4,r_21_4.5)
+timeb <- c(0.5288,1.0329,1.5288,2.0329,2.6164,3.36344,3.6164,4.1123,4.5616)
+fit_10 = lm(jan_10b~poly(timeb,2))
+fit_11 = lm(jan_11b~poly(timeb,2))
+fit_12 = lm(jan_12b~poly(timeb,2))
+fit_13 = lm(jan_13b~poly(timeb,2))
+fit_14 = lm(jan_14b~poly(timeb,2))
+fit_17 = lm(jan_17b~poly(timeb,2))
+fit_18 = lm(jan_18b~poly(timeb,2))
+fit_19 = lm(jan_19b~poly(timeb,2))
+fit_20 = lm(jan_20b~poly(timeb,2))
+fit_21 = lm(jan_21b~poly(timeb,2))
+summary(fit_10)
+summary(fit_11)
+summary(fit_12)
+summary(fit_13)
+summary(fit_14)
+summary(fit_17)
+summary(fit_18)
+summary(fit_19)
+summary(fit_20)
+summary(fit_21)
+"r_10 = 0.01325+0.00706x-0.00197x^2"
+"r_11 = 0.01326 + 0.0066x-0.00177x^2"
+"r_12 = 0.0133 + 0.0066x-0.001727x^2"
+"r_13 = 0.01337+0.006388x-0.001809x^2"
+"r_14 = 0.01358 + 0.00647x - 0.0018x^2"
+"r_17 = 0.0143889 + 0.0064x - 0.00189x^2"
+"r_18 = 0.01485 + 0.006545x - 0.0018x^2"
+"r_19 = 0.015 + 0.0067x - 0.0019x^2"
+"r_20 = 0.01484 + 0.00698x - 0.00216x^2"
+"r_21 = 0.01445 + 0.0069x - 0.0023x^2"
+```
+
+
+```{r}
+f_10_11 <- 0.01325
+f_10_11
+f_11_11 <-0.01326
+f_11_11
+f_12_11 <-0.0133
+f_12_11
+f_13_11 <-0.01337
+f_13_11
+f_14_11 <- 0.01358 
+f_14_11
+f_17_11 <- 0.0143889
+f_17_11
+f_18_11 <- 0.01485
+f_18_11
+f_19_11 <- 0.015
+f_19_11
+f_20_11 <- 0.01484
+f_20_11
+f_21_11 <- 0.01445
+f_21_11
+```
+
+```{r}
+f_10_12 <- 0.01325+0.00706-0.00197 + 0.00706-2*0.00197
+f_10_12
+f_11_12 <- 0.01326 + 0.0066-0.00177+ 0.0066-0.00177*2 
+f_11_12
+f_12_12 <- 0.0133 + 0.0066 -0.001727 + 0.0066-0.001727*2
+f_12_12
+f_13_12 <- 0.01337+0.006388-0.001809+0.006388-0.001809*2
+f_13_12
+f_14_12 <- 0.01358 + 0.00647 - 0.0018 + 0.00647 - 0.0018*2
+f_14_12
+f_17_12 <- 0.0143889 + 0.0064 - 0.00189 +0.0064 - 0.00189*2
+f_17_12
+f_18_12 <-  0.01485 + 0.006545 - 0.0018 + 0.006545 - 0.0018*2
+f_18_12
+f_19_12 <-  0.015 + 0.0067 - 0.0019+ 0.0067 - 0.0019*2
+f_19_12
+f_20_12 <- 0.01484 + 0.00698 - 0.00216 + 0.00698 - 0.00216*2
+f_20_12
+f_21_12 <- 0.01445 + 0.0069 - 0.0023 + 0.0069 - 0.0023*2
+f_21_12
+```
+
+```{r}
+f_10_13 <- 0.01325+0.00706*2-0.00197*4 + 2*(0.00706-2*0.00197*2)
+f_10_13
+f_11_13 <- 0.01326 + 0.0066*2-0.00177*4 + 2*(0.0066-2*0.00177*2)
+f_11_13
+f_12_13 <- 0.0133 + 0.0066*2 -0.001727*4 +  2*(0.0066-2*0.001727*2)
+f_12_13
+f_13_13 <-  0.01337+0.006388*2-0.001809*4 + 2*(0.006388-2*0.001809*2)
+f_13_13
+f_14_13 <-  0.01358 + 0.00647*2 - 0.0018*4+ 2*(0.00647 - 2*0.0018*2)
+f_14_13
+f_17_13 <- 0.0143889 + 0.0064*2 - 0.00189*4+ 2*(0.0064 - 2*0.00189*2)
+f_17_13
+f_18_13 <- 0.01485 + 0.006545*2 - 0.0018*4  + 2*(0.006545 - 2*0.0018*2)
+f_18_13
+f_19_13 <- 0.015 + 0.0067*2 - 0.0019*4 + 2*( 0.0067 - 2*0.0019*2)
+f_19_13
+f_20_13 <- 0.01484 + 0.00698*2 - 0.00216*4+ 2*(0.00698 - 2*0.00216*2)
+f_20_13
+f_21_13 <- 0.01445 + 0.0069*2 - 0.0023*4 + 2*(0.0069 - 2*0.0023*2)
+f_21_13
+```
+
+```{r}
+f_10_14 <- 0.01325+0.00706*3-0.00197*9 + 3*(0.00706-2*0.00197*3)
+f_10_14
+f_11_14 <- 0.01326 + 0.0066*3-0.00177*9 + 3*(0.0066-2*0.00177*3)
+f_11_14
+f_12_14 <- 0.0133 + 0.0066*3 -0.001727*9 +  3*(0.0066-2*0.001727*3)
+f_12_14
+f_13_14 <- 0.01337+0.006388*3-0.001809*9 + 3*(0.006388-2*0.001809*3)
+f_13_14
+f_14_14 <- 0.01358 + 0.00647*3 - 0.0018*9+ 3*(0.00647 - 2*0.0018*3)
+f_14_14
+f_17_14 <-   0.0143889 + 0.0064*3 - 0.00189*9+ 3*(0.0064 - 2*0.00189*3)
+f_17_14
+f_18_14 <-  0.01485 + 0.006545*3 - 0.0018*9  + 3*(0.006545 - 2*0.0018*3)
+f_18_14
+f_19_14 <- 0.015 + 0.0067*3 - 0.0019*9 + 3*( 0.0067 - 2*0.0019*3)
+f_19_14
+f_20_14 <- 0.01484 + 0.00698*3 - 0.00216*9+ 3*(0.00698 - 2*0.00216*3)
+f_20_14
+f_21_14 <- 0.01445 + 0.0069*3 - 0.0023*9 + 3*(0.0069 - 2*0.0023*3)
+f_21_14
+```
+
+```{r}
+jan_10c <- c(f_10_11,f_10_12,f_10_13,f_10_14)
+jan_11c <- c(f_11_11,f_11_12,f_11_13,f_11_14)
+jan_12c <- c(f_12_11,f_12_12,f_12_13,f_12_14)
+jan_13c <- c(f_13_11,f_13_12,f_13_13,f_13_14)
+jan_14c <- c(f_14_11,f_14_12,f_14_13,f_14_14)
+jan_17c <- c(f_17_11,f_17_12,f_17_13,f_17_14)
+jan_18c <- c(f_18_11,f_18_12,f_18_13,f_18_14)
+jan_19c <- c(f_19_11,f_19_12,f_19_13,f_19_14)
+jan_20c <- c(f_20_11,f_20_12,f_20_13,f_20_14)
+jan_21c <- c(f_21_11,f_21_12,f_21_13,f_21_14)
+timec <- c(1,2,3,4)
+colours <- c("orange", "blue", "red", "forestgreen", "yellow", rgb(0.3,0.3,.3),
+                  rgb(0.6,0.3,0), rgb(.9,0,0), 
+                  rgb(0.3,0.6,0), rgb(0.3,0,.6), rgb(0,0.3,.6))
+plot(timec,jan_10c,main = "Forward curve" ,xlim = c(1,4),ylim = c(-0.01, 0.03), col = colours[1], xlab="forward year",ylab="forward rates")
+lines(timec,jan_10c, col = colours[1])
+lines(timec,jan_11c, col = colours[2])
+lines(timec,jan_12c, col = colours[3])
+lines(timec,jan_13c, col = colours[4])
+lines(timec,jan_14c, col = colours[5])
+lines(timec,jan_17c, col = colours[6])
+lines(timec,jan_18c, col = colours[7])
+lines(timec,jan_19c, col = colours[8])
+lines(timec,jan_20c, col = colours[9])
+lines(timec,jan_21c, col = colours[10])
+legend("bottomleft", legend = c("Jan-10-2022","Jan-11-2022","Jan-12-2022","Jan-13-2022","Jan-14-2022","Jan-17-2022","Jan-18-2022","Jan-19-2022","Jan-20-2022","Jan-21-2022"),cex=0.8,lty=1, lwd=2, ,col = colours, bg="white")
+
+```
+
+```{r}
+jan_10y <- c(y_10_0.1,y_10_0.5,y_10_1,y_10_1.5,y_10_2,y_10_2.5,y_10_3,y_10_3.5,y_10_4,y_10_4.5,y_10_5)
+jan_11y <- c(y_11_0.1,y_11_0.5,y_11_1,y_11_1.5,y_11_2,y_11_2.5,y_11_3,y_11_3.5,y_11_4,y_11_4.5,y_11_5)
+jan_12y <- c(y_12_0.1,y_12_0.5,y_12_1,y_12_1.5,y_12_2,y_12_2.5,y_12_3,y_12_3.5,y_12_4,y_12_4.5,y_12_5)
+jan_13y <- c(y_13_0.1,y_13_0.5,y_13_1,y_13_1.5,y_13_2,y_13_2.5,y_13_3,y_13_3.5,y_13_4,y_13_4.5,y_13_5)
+jan_14y <- c(y_14_0.1,y_14_0.5,y_14_1,y_14_1.5,y_14_2,y_14_2.5,y_14_3,y_14_3.5,y_14_4,y_14_4.5,y_14_5)
+jan_17y <- c(y_17_0.1,y_17_0.5,y_17_1,y_17_1.5,y_17_2,y_17_2.5,y_17_3,y_17_3.5,y_17_4,y_17_4.5,y_17_5)
+jan_18y <- c(y_18_0.1,y_18_0.5,y_18_1,y_19_1.5,y_19_2,y_19_2.5,y_19_3,y_19_3.5,y_19_4,y_19_4.5,y_19_5)
+jan_19y <- c(y_19_0.1,y_19_0.5,y_19_1,y_19_1.5,y_19_2,y_19_2.5,y_19_3,y_19_3.5,y_19_4,y_19_4.5,y_19_5)
+jan_20y <- c(y_20_0.1,y_20_0.5,y_20_1,y_20_1.5,y_20_2,y_20_2.5,y_20_3,y_20_3.5,y_20_4,y_20_4.5,y_20_5)
+jan_21y <- c(y_21_0.1,y_21_0.5,y_21_1,y_21_1.5,y_21_2,y_21_2.5,y_21_3,y_21_3.5,y_21_4,y_21_4.5,y_21_5)
+colours <- c("orange", "blue", "red", "forestgreen", "yellow", rgb(0.3,0.3,.3),
+                  rgb(0.6,0.3,0), rgb(.9,0,0), 
+                  rgb(0.3,0.6,0), rgb(0.3,0,.6), rgb(0,0.3,.6))
+time <- c(0.1095,0.5288,1.0329,1.5288,2.0329,2.6164,3.36344,3.6164,4.1123,4.5616,5.3644)
+plot(time,jan_10y,main = "Yield curve" ,xlim = c(0,5),ylim = c(0.01, 0.04), col = colours[1], xlab="Time to Maturity (in years)",ylab="Yields")
+lines(time,jan_10y, col = colours[1])
+lines(time,jan_11y, col = colours[2])
+lines(time,jan_12y, col = colours[3])
+lines(time,jan_13y, col = colours[4])
+lines(time,jan_14y, col = colours[5])
+lines(time,jan_17y, col = colours[6])
+lines(time,jan_18y, col = colours[7])
+lines(time,jan_19y, col = colours[8])
+lines(time,jan_20y, col = colours[9])
+lines(time,jan_21y, col = colours[10])
+legend("topleft", legend = c("Jan-10-2022","Jan-11-2022","Jan-12-2022","Jan-13-2022","Jan-14-2022","Jan-17-2022","Jan-18-2022","Jan-19-2022","Jan-20-2022","Jan-21-2022"),cex=0.8,lty=1, lwd=2, ,col = colours, bg="white")
+```
+
+
+```{r}
+X1 <- c(log(y_11_1/y_10_1),log(y_12_1/y_11_1),log(y_13_1/y_12_1),log(y_14_1/y_13_1),log(y_17_1/y_14_1),log(y_18_1/y_17_1),log(y_19_1/y_18_1),log(y_20_1/y_19_1),log(y_21_1/y_20_1))
+X1
+X2 <- c(log(y_11_2/y_10_2),log(y_12_2/y_11_2),log(y_13_2/y_12_2),log(y_14_2/y_13_2),log(y_17_2/y_14_2),log(y_18_2/y_17_2),log(y_19_2/y_18_2),log(y_20_2/y_19_2),log(y_21_2/y_20_2))
+X2
+X3 <- c(log(y_11_3/y_10_3),log(y_12_3/y_11_3),log(y_13_3/y_12_3),log(y_14_3/y_13_3),log(y_17_3/y_14_3),log(y_18_3/y_17_3),log(y_19_3/y_18_3),log(y_20_3/y_19_3),log(y_21_3/y_20_3))
+X3
+X4 <- c(log(y_11_4/y_10_4),log(y_12_4/y_11_4),log(y_13_4/y_12_4),log(y_14_4/y_13_4),log(y_17_4/y_14_4),log(y_18_4/y_17_4),log(y_19_4/y_18_4),log(y_20_4/y_19_4),log(y_21_4/y_20_4))
+X4
+X5 <- c(log(y_11_5/y_10_5),log(y_12_5/y_11_5),log(y_13_5/y_12_5),log(y_14_5/y_13_5),log(y_17_5/y_14_5),log(y_18_5/y_17_5),log(y_19_5/y_18_5),log(y_20_5/y_19_5),log(y_21_5/y_20_5))
+X5
+```
+
+```{r}
+M11<- c(cov(X1,X1), cov(X2,X1), cov(X3,X1), cov(X4,X1), cov(X5,X1))
+M12<-c(cov(X1,X2), cov(X2,X2), cov(X3,X2), cov(X4,X2), cov(X5,X2))
+M13<-c(cov(X1,X3), cov(X2,X3), cov(X3,X3), cov(X4,X3), cov(X5,X3))  
+M14<-c(cov(X1,X4), cov(X2,X4), cov(X3,X4), cov(X4,X4), cov(X5,X4))
+M15<-c(cov(X1,X5), cov(X2,X5), cov(X3,X5), cov(X4,X5), cov(X5,X5))
+A <- as.matrix(data.frame(M11,M12,M13,M14,M15))
+A
+e1 <- eigen(A)
+e1
+ratio_1 = 1.729607e-03 / (1.729607e-03 + 2.421598e-04+ 3.823644e-05 + 2.490159e-05 + 1.316000e-06)
+ratio_1
+```
+
+```{r}
+Y1 <- c(log(f_11_11/f_10_11),log(f_12_11/f_11_11),log(f_13_11/f_12_11),log(f_14_11/f_13_11),log(f_17_11/f_14_11),log(f_18_11/f_17_11),log(f_19_11/f_18_11),log(f_20_11/f_19_11),log(f_21_11/f_20_11))
+Y1
+Y2 <- c(log(f_11_12/f_10_12),log(f_12_12/f_11_12),log(f_13_12/f_12_12),log(f_14_12/f_13_12),log(f_17_12/f_14_12),log(f_18_12/f_17_12),log(f_19_12/f_18_12),log(f_20_12/f_19_12),log(f_21_12/f_20_12))
+Y2
+Y3 <- c(log(f_11_13/f_10_13),log(f_12_13/f_11_13),log(f_13_13/f_12_13),log(f_14_13/f_13_13),log(f_17_13/f_14_13),log(f_18_13/f_17_13),log(f_19_13/f_18_13),log(f_20_13/f_19_13),log(f_21_13/f_20_13))
+Y3
+Y4 <- c(log(f_11_14/f_10_14),log(f_12_14/f_11_14),log(f_13_14/f_12_14),log(f_14_14/f_13_14),log(f_17_14/f_14_14),log(f_18_14/f_17_14),log(f_19_14/f_18_14),log(-f_20_14+f_19_14/f_19_14),log(f_21_14/f_20_14))
+Y4
+```
+
+```{r}
+M21<-c(cov(Y1,Y1), cov(Y2,Y1), cov(Y3,Y1), cov(Y4,Y1))
+M22<-c(cov(Y1,Y2), cov(Y2,Y2), cov(Y3,Y2), cov(Y4,Y2))
+M23<-c(cov(Y1,Y3), cov(Y2,Y3), cov(Y3,Y3), cov(Y4,Y3))  
+M24<-c(cov(Y1,Y4), cov(Y2,Y4), cov(Y3,Y4), cov(Y4,Y4))
+B <- as.matrix(data.frame(M21,M22,M23,M24))
+B
+e2 <- eigen(B)
+e2
+ratio = 5.998402e-01 / (5.998402e-01 + 8.111984e-03 + 3.028413e-04 + 7.313328e-05)
+ratio
+```
